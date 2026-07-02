@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="nl" class="scroll-smooth bg-gray-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cho Noh Maatvoering | Landmeetkunde & Revisie</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            900: '#0B1B3D', // Diep donkerblauw (corporate basis)
+                            800: '#142C5C',
+                        },
+                        corporate: {
+                            orange: '#F97316', // Energiek, veiligheids-oranje (accent)
+                            light: '#FFF7ED', // Zacht oranje voor achtergronden
+                        },
+                        gray: {
+                            50: '#F8FAFC', // Zeer zacht blauwgrijs voor achtergronden
+                            100: '#F1F5F9',
+                            200: '#E2E8F0',
+                            600: '#475569',
+                            800: '#1E293B',
+                        }
+                    },
+                    boxShadow: {
+                        'corporate': '0 10px 40px -10px rgba(11, 27, 61, 0.08)',
+                        'corporate-hover': '0 20px 40px -10px rgba(11, 27, 61, 0.12)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            color: #1E293B;
+            overflow-x: hidden;
+        }
+        
+        /* Clean Corporate Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F8FAFC;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+
+        .img-mask {
+            overflow: hidden;
+            border-radius: 0.5rem; /* Subtieler dan voorheen, zakelijker */
+        }
+        .img-mask img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform-origin: center;
+        }
+
+        .gsap-reveal {
+            visibility: hidden;
+        }
+        
+        /* Subtiel raster voor technische uitstraling (blueprint idee) */
+        .tech-grid {
+            background-image: 
+                linear-gradient(to right, rgba(249, 115, 22, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(249, 115, 22, 0.05) 1px, transparent 1px);
+            background-size: 3rem 3rem;
+        }
+    </style>
+</head>
+<body class="font-body antialiased selection:bg-corporate-orange selection:text-white">
+
+    <nav class="fixed w-full z-50 top-0 left-0 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-[90rem] mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-navy-900 rounded flex items-center justify-center">
+                    <span class="text-white font-heading font-bold text-sm">CN</span>
+                </div>
+                <div class="font-heading font-bold text-xl tracking-tight text-navy-900">
+                    Cho Noh <span class="text-corporate-orange font-normal">Maatvoering</span>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+                <a href="#over" class="hover:text-corporate-orange transition-colors">Over ons</a>
+                <a href="#expertise" class="hover:text-corporate-orange transition-colors">Expertise</a>
+                <a href="#tarieven" class="hover:text-corporate-orange transition-colors">Tarieven</a>
+                <a href="#contact" class="bg-corporate-orange text-white px-5 py-2.5 rounded-md hover:bg-navy-900 transition-colors shadow-sm">
+                    Offerte aanvragen
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="tech-grid min-h-screen pt-32 pb-20 px-6 relative bg-white">
+        <div class="max-w-[90rem] mx-auto relative z-10 pt-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Links: Strakke, zakelijke typografie -->
+                <div class="lg:col-span-6 gsap-reveal" data-reveal="fade-up">
+                    <div class="inline-block px-3 py-1 bg-corporate-light text-corporate-orange font-semibold text-xs rounded-full mb-6 uppercase tracking-wide">
+                        Civiele Techniek & Infra
+                    </div>
+                    <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight text-navy-900 mb-6">
+                        Exacte maatvoering voor complexe projecten.
+                    </h1>
+                    <p class="text-lg text-gray-600 font-light leading-relaxed mb-10 max-w-lg">
+                        Gespecialiseerd in landmeetkunde voor civiele techniek, tunnels en GWW. Millimeternauwkeurige data, flexibel ingezet daar waar de extreme theorie de harde praktijk ontmoet.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="inline-flex justify-center items-center px-6 py-3.5 bg-navy-900 text-white font-medium rounded-md hover:bg-corporate-orange transition-colors shadow-corporate">
+                            Bespreek uw project
+                        </a>
+                        <a href="#expertise" class="inline-flex justify-center items-center px-6 py-3.5 bg-white border border-gray-200 text-gray-800 font-medium rounded-md hover:bg-gray-50 transition-colors shadow-sm">
+                            Bekijk diensten
+                        </a>
+                    </div>
+
+                    <div class="mt-12 flex items-center gap-6 pt-8 border-t border-gray-100">
+                        <div class="img-mask h-16 w-16 shadow-sm border border-gray-100 rounded-full">
+                            <img src="Images/WhatsApp Image 2026-07-02 at 11.21.36.jpeg" alt="Cho Noh Maatvoering aan het water">
+                        </div>
+                        <div>
+                            <p class="font-semibold text-navy-900">Cho Noh Noe</p>
+                            <p class="text-sm text-gray-500">Onafhankelijk Landmeter / Maatvoerder</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rechts: Corporate Image Compositie -->
+                <div class="lg:col-span-6 relative gsap-reveal" data-reveal="fade-left">
+                    <div class="img-mask h-[32rem] lg:h-[42rem] shadow-corporate rounded-xl border border-gray-100 relative z-10">
+                        <img src="Images/WhatsApp Image 2026-07-02 at 11.21.38.jpeg" alt="Cho Noh Portret" class="hover:scale-105 transition-transform duration-1000 ease-out">
+                    </div>
+                    
+                    <!-- Drijvend info-blok (Corporate detail) -->
+                    <div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-corporate border border-gray-100 z-20 max-w-xs hidden md:block gsap-reveal" data-reveal="fade-up" data-delay="0.4">
+                        <div class="flex items-center gap-4 mb-2">
+                            <div class="w-10 h-10 rounded-full bg-corporate-light flex items-center justify-center text-corporate-orange">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="font-heading font-bold text-navy-900 text-lg">Leica Precisie</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600">Geavanceerde apparatuur (GPS, Total Station, DNA03) voor de hoogste betrouwbaarheid.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section class="py-24 px-6 relative bg-gray-50 border-t border-gray-200" id="tarieven">
+        <div class="max-w-[90rem] mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16 gsap-reveal" data-reveal="fade-up">
+                <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy-900 mb-4">Transparante Investering</h2>
+                <p class="text-gray-600 font-light text-lg">
+                    Heldere afspraken, geen verborgen kosten. Van een spoedklus voor één dag tot een vaste landmeter voor een langlopend infraproject.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Regiebasis Card -->
+                <div class="bg-white p-10 rounded-xl border border-gray-100 shadow-corporate relative transition-shadow hover:shadow-corporate-hover gsap-reveal" data-reveal="fade-up" data-delay="0.1">
+                    <h3 class="font-heading text-2xl font-bold text-navy-900 mb-2">Regiebasis</h3>
+                    <p class="text-gray-500 mb-6">Flexibele inzet per uur of per dag</p>
+                    <div class="text-3xl font-bold text-corporate-orange mb-8">Uurtarief <span class="text-base font-normal text-gray-500">in overleg</span></div>
+                    
+                    <ul class="space-y-4 text-gray-600 mb-10">
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Snel inzetbaar bij calamiteiten
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Inclusief hoogwaardige Leica apparatuur
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Directe levering van ruwe meetdata
+                        </li>
+                    </ul>
+                    <a href="#contact" class="block text-center w-full py-3.5 border-2 border-navy-900 text-navy-900 font-medium hover:bg-navy-900 hover:text-white transition-colors rounded-md">
+                        Beschikbaarheid opvragen
+                    </a>
+                </div>
+
+                <!-- Projectbasis Card (Highlighted) -->
+                <div class="bg-navy-900 p-10 rounded-xl shadow-corporate relative transition-shadow hover:shadow-corporate-hover transform md:-translate-y-4 border border-navy-800 gsap-reveal" data-reveal="fade-up" data-delay="0.2">
+                    <div class="absolute top-0 right-8 transform -translate-y-1/2 bg-corporate-orange text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                        Veel gekozen
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold text-white mb-2">Projectbasis</h3>
+                    <p class="text-gray-400 mb-6">Totale ontzorging voor uw begroting</p>
+                    <div class="text-3xl font-bold text-white mb-8">Vaste Aannemsom</div>
+                    
+                    <ul class="space-y-4 text-gray-300 mb-10">
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-corporate-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Geen financiële verrassingen achteraf
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-corporate-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Inclusief verwerking en As-built dossier
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <svg class="w-5 h-5 text-corporate-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            Vaste planning en oplevermomenten
+                        </li>
+                    </ul>
+                    <a href="#contact" class="block text-center w-full py-3.5 bg-corporate-orange text-white font-medium hover:bg-white hover:text-navy-900 transition-colors rounded-md">
+                        Vraag offerte op maat aan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 bg-white border-t border-gray-200" id="over">
+        <div class="max-w-[90rem] mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+                <div class="lg:col-span-5 gsap-reveal" data-reveal="fade-right">
+                    <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy-900 mb-6">Operationele Kaders & Werkwijze</h2>
+                    <p class="text-gray-600 leading-relaxed mb-8">
+                        Transparantie is in de civiele techniek essentieel. Hier vindt u direct antwoord op de meest gestelde vragen rondom inzetbaarheid, apparatuur en kwaliteitsgarantie.
+                    </p>
+                    
+                    <!-- Trust Image in FAQ -->
+                    <div class="img-mask rounded-lg shadow-sm border border-gray-100">
+                        <img src="Images/WhatsApp Image 2026-07-02 at 11.29.44.jpeg" alt="Cho Noh samenwerking op project" class="grayscale hover:grayscale-0 transition-all duration-500">
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-7 space-y-4 gsap-reveal" data-reveal="fade-left">
+                    <!-- Corporate Accordion Items -->
+                    <div class="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-white hover:shadow-sm transition-all cursor-default">
+                        <h3 class="font-heading font-semibold text-lg text-navy-900 mb-3">Welke meetapparatuur zet u in?</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Ik werk uitsluitend met hoogwaardige instrumenten van Leica Geosystems. Voor algemene maatvoering gebruik ik geavanceerde totaalstations en GPS/GNSS rovers. Voor uiterst secure deformatiemetingen zet ik de Leica DNA03 digitale waterpas in, gecombineerd met barcodebaaksystemen.
+                        </p>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-white hover:shadow-sm transition-all cursor-default">
+                        <h3 class="font-heading font-semibold text-lg text-navy-900 mb-3">Werkt u landelijk?</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Ja. Vanuit mijn centrale basis in Nederland ben ik in staat om projecten door het hele land te bedienen. Voor specifieke civiele projecten (zoals waterwerken in de delta of infrastructurele knooppunten) ben ik zeer flexibel in mijn planning en aanwezigheid op de bouwplaats.
+                        </p>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-6 bg-gray-50 hover:bg-white hover:shadow-sm transition-all cursor-default">
+                        <h3 class="font-heading font-semibold text-lg text-navy-900 mb-3">Hoe garandeert u continuïteit bij slecht weer?</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            In de GWW en bouw stopt de planning zelden. Ik ben pragmatisch ingesteld; het werk gaat door, ook in de modder. Mijn Leica-apparatuur is robuust en waterbestendig. Alleen bij extreem weer dat de optische meetnauwkeurigheid onverantwoord beïnvloedt, staken we tijdelijk de meting in overleg met de uitvoerder.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 bg-navy-900 text-white relative">
+        <!-- Subtiel achtergrond patroon voor tech vibe -->
+        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
+        
+        <div class="max-w-[90rem] mx-auto relative z-10">
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-center mb-16 gsap-reveal" data-reveal="fade-up">Bewezen Resultaat in de Praktijk</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-navy-800 p-8 rounded-xl border border-navy-700 shadow-corporate gsap-reveal" data-reveal="fade-up" data-delay="0.1">
+                    <div class="text-corporate-orange mb-6">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"></path></svg>
+                    </div>
+                    <p class="text-gray-300 font-light text-sm mb-8 leading-relaxed">"Voor ons as-built dossier van de nieuwe tunnelbak hadden we op korte termijn betrouwbare data nodig. Cho levert niet alleen snel, maar werkt uiterst secuur en rapporteert overzichtelijk. Een absolute professional."</p>
+                    <div class="flex items-center gap-4 border-t border-navy-700 pt-4">
+                        <div>
+                            <p class="font-semibold text-white text-sm">Marten van den Berg</p>
+                            <p class="text-xs text-corporate-orange">Projectleider Infra</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-navy-800 p-8 rounded-xl border border-navy-700 shadow-corporate gsap-reveal" data-reveal="fade-up" data-delay="0.2">
+                    <div class="text-corporate-orange mb-6">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"></path></svg>
+                    </div>
+                    <p class="text-gray-300 font-light text-sm mb-8 leading-relaxed">"Bij de voorbereiding van een groot grondverzetproject liepen we tegen capaciteitsproblemen aan. Cho nam het roer over en zorgde dat de volumebepalingen via GPS direct beschikbaar waren voor de machinisten."</p>
+                    <div class="flex items-center gap-4 border-t border-navy-700 pt-4">
+                        <div>
+                            <p class="font-semibold text-white text-sm">Jeroen R.</p>
+                            <p class="text-xs text-corporate-orange">Uitvoerder GWW</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-navy-800 p-8 rounded-xl border border-navy-700 shadow-corporate gsap-reveal" data-reveal="fade-up" data-delay="0.3">
+                    <div class="text-corporate-orange mb-6">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"></path></svg>
+                    </div>
+                    <p class="text-gray-300 font-light text-sm mb-8 leading-relaxed">"Deformaties monitoren bij sluizen is puur precisiewerk. Door zijn ervaring met de DNA03 waterpas wisten we zeker dat elke zetting correct geregistreerd zou worden. Transparant en zeer kundig."</p>
+                    <div class="flex items-center gap-4 border-t border-navy-700 pt-4">
+                        <div>
+                            <p class="font-semibold text-white text-sm">Sarah K.</p>
+                            <p class="text-xs text-corporate-orange">Constructeur Waterbouw</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 bg-gray-50" id="expertise">
+        <div class="max-w-[90rem] mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gsap-reveal" data-reveal="fade-up">
+                <div class="max-w-2xl">
+                    <h2 class="font-heading text-3xl md:text-4xl font-bold text-navy-900 mb-4">Onze Expertise in Beeld</h2>
+                    <p class="text-gray-600 font-light">Van complexe waterstaatswerken tot stedelijke revisie. Bekijk de praktijksituaties waarin wij dagelijks opereren.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
+                
+                <!-- Item 1 -->
+                <div class="lg:col-span-2 img-mask rounded-xl shadow-sm border border-gray-200 relative group overflow-hidden gsap-reveal" data-reveal="fade-up">
+                    <img src="Images/WhatsApp Image 2026-07-02 at 11.21.37.jpeg" alt="Tunnel Maatvoering" class="group-hover:scale-105 transition-transform duration-700 ease-out brightness-90">
+                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-navy-900/90 to-transparent">
+                        <h3 class="font-heading font-bold text-xl text-white">Infra & Tunnels</h3>
+                        <p class="text-gray-200 text-sm mt-1">Uitzet- en controlemetingen ondergronds.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="img-mask rounded-xl shadow-sm border border-gray-200 relative group overflow-hidden gsap-reveal" data-reveal="fade-up" data-delay="0.1">
+                    <img src="Images/WhatsApp Image 2026-07-02 at 11.21.40.jpeg" alt="GWW GPS Meting" class="group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="absolute top-4 left-4 bg-white/95 backdrop-blur px-3 py-1 rounded shadow-sm">
+                        <p class="font-heading font-semibold text-navy-900 text-sm">GWW Verzet</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="img-mask rounded-xl shadow-sm border border-gray-200 relative group overflow-hidden gsap-reveal" data-reveal="fade-up">
+                    <img src="Images/WhatsApp Image 2026-07-02 at 11.21.44(2).jpeg" alt="Stedelijke Revisie" class="group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur px-3 py-1 rounded shadow-sm">
+                        <p class="font-heading font-semibold text-navy-900 text-sm">Stedelijke Bebouwing (As-built)</p>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="lg:col-span-2 img-mask rounded-xl shadow-sm border border-gray-200 relative group overflow-hidden gsap-reveal" data-reveal="fade-up" data-delay="0.1">
+                    <img src="Images/WhatsApp Image 2026-07-02 at 11.21.43(1).jpeg" alt="Waterstaatswerken" class="group-hover:scale-105 transition-transform duration-700 ease-out brightness-95">
+                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-navy-900/90 to-transparent">
+                        <h3 class="font-heading font-bold text-xl text-white">Waterstaatswerken</h3>
+                        <p class="text-gray-200 text-sm mt-1">Complexe inmetingen bij sluizen en dammen.</p>
+                    </div>
+                </div>
+                
+                <!-- Item 5 (Small center focus) -->
+                <div class="lg:col-span-3 img-mask h-[250px] rounded-xl shadow-sm border border-gray-200 relative group overflow-hidden gsap-reveal" data-reveal="fade-up">
+                    <img src="Images/WhatsApp Image 2026-07-02 at 11.21.44(1).jpeg" alt="Precisie Waterpassen DNA03" class="group-hover:scale-105 transition-transform duration-700 ease-out object-top">
+                    <div class="absolute inset-0 bg-navy-900/40 group-hover:bg-transparent transition-colors duration-500"></div>
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div class="bg-white/95 backdrop-blur px-6 py-3 rounded-md shadow-lg text-center">
+                            <h3 class="font-heading font-bold text-navy-900">Deformatiemetingen</h3>
+                            <p class="text-gray-500 text-xs mt-1">Millimeterwerk met DNA03</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="img-mask rounded-xl shadow-sm border border-gray-200 relative group overflow-hidden gsap-reveal" data-reveal="fade-up" data-delay="0.1">
+                    <img src="Images/WhatsApp Image 2026-07-02 at 11.21.43.jpeg" alt="Maatvoering op de bouwplaats" class="group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="absolute top-4 left-4 bg-white/95 backdrop-blur px-3 py-1 rounded shadow-sm">
+                        <p class="font-heading font-semibold text-navy-900 text-sm">Bouwplaats Maatvoering</p>
+                    </div>
+                </div>
+
+                <!-- Item 7 -->
+                <div class="img-mask rounded-xl shadow-sm border border-gray-200 relative group overflow-hidden gsap-reveal" data-reveal="fade-up" data-delay="0.2">
+                    <img src="Images/WhatsApp Image 2026-07-02 at 11.29.35.jpeg" alt="Landmeetkundige werkzaamheden" class="group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur px-3 py-1 rounded shadow-sm">
+                        <p class="font-heading font-semibold text-navy-900 text-sm">Precisiewerk in het Veld</p>
+                    </div>
+                </div>
+
+                <!-- Item 8 -->
+                <div class="img-mask rounded-xl shadow-sm border border-gray-200 relative group overflow-hidden gsap-reveal" data-reveal="fade-up" data-delay="0.3">
+                    <img src="Images/WhatsApp Image 2026-07-02 at 11.29.43.jpeg" alt="Ondersteuning infraproject" class="group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="absolute top-4 left-4 bg-white/95 backdrop-blur px-3 py-1 rounded shadow-sm">
+                        <p class="font-heading font-semibold text-navy-900 text-sm">Infra &amp; Grondverzet</p>
+                    </div>
+                </div>
+
+                <!-- Item 9 -->
+                <div class="img-mask rounded-xl shadow-sm border border-gray-200 relative group overflow-hidden gsap-reveal" data-reveal="fade-up" data-delay="0.4">
+                    <img src="Images/WhatsApp Image 2026-07-02 at 11.21.44.jpeg" alt="Veldwerkzaamheden" class="group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="absolute bottom-4 left-4 bg-white/95 backdrop-blur px-3 py-1 rounded shadow-sm">
+                        <p class="font-heading font-semibold text-navy-900 text-sm">Veldmeting</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-white border-t border-gray-200 pt-24 pb-12 px-6 relative overflow-hidden">
+        <!-- Decoratieve corporate lijn -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-corporate-orange to-navy-900"></div>
+        
+        <div class="max-w-[90rem] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+            
+            <div class="lg:col-span-7 gsap-reveal" data-reveal="fade-right">
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-navy-900 tracking-tight mb-6">
+                    Klaar om uw project te starten?
+                </h2>
+                <p class="text-gray-600 mb-10 max-w-md">
+                    Neem contact op voor een vrijblijvende kennismaking of een offerte op maat. Wij reageren doorgaans binnen 24 uur op technische aanvragen.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="mailto:info@chonoh.nl" class="inline-flex items-center justify-center bg-corporate-orange text-white font-medium py-3.5 px-8 rounded-md shadow-sm hover:bg-navy-900 transition-colors">
+                        Stuur een E-mail
+                    </a>
+                    <a href="tel:+31600000000" class="inline-flex items-center justify-center bg-white border border-gray-300 text-navy-900 font-medium py-3.5 px-8 rounded-md shadow-sm hover:bg-gray-50 transition-colors">
+                        Bel: +31 (0)6 1234 5678
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 flex flex-col justify-end text-gray-600 text-sm space-y-3 bg-gray-50 p-8 rounded-xl border border-gray-100 gsap-reveal" data-reveal="fade-left">
+                <div class="mb-4">
+                    <div class="w-10 h-10 bg-navy-900 rounded flex items-center justify-center mb-4">
+                        <span class="text-white font-heading font-bold text-sm">CN</span>
+                    </div>
+                    <p class="font-heading font-bold text-navy-900 text-lg">Cho Noh Maatvoering</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-corporate-orange shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <p>Regio Centraal Nederland<br>Inzetbaar door heel Nederland</p>
+                </div>
+                <div class="flex items-start gap-3 pt-2 border-t border-gray-200">
+                    <svg class="w-5 h-5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <p>KVK: 12345678 (Aan te passen)</p>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="max-w-[90rem] mx-auto pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-medium">
+            <p>&copy; 2026 Cho Noh Maatvoering. Alle rechten voorbehouden.</p>
+            <div class="flex gap-4 mt-4 md:mt-0">
+                <a href="#" class="hover:text-corporate-orange transition-colors">Algemene Voorwaarden</a>
+                <a href="#" class="hover:text-corporate-orange transition-colors">Privacybeleid</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Strakke, soepele corporate animaties (minder agressief dan de neo-brutalist variant)
+            const reveals = document.querySelectorAll(".gsap-reveal");
+
+            reveals.forEach((element) => {
+                const animationType = element.getAttribute("data-reveal");
+                const delay = parseFloat(element.getAttribute("data-delay")) || 0;
+                
+                let animationProps = {
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 90%",
+                        toggleActions: "play none none none" 
+                    },
+                    duration: 0.8,
+                    ease: "power2.out",
+                    delay: delay,
+                    autoAlpha: 1
+                };
+
+                if (animationType === "fade-up") {
+                    gsap.fromTo(element, { y: 30, autoAlpha: 0 }, { y: 0, ...animationProps });
+                } else if (animationType === "fade-right") {
+                    gsap.fromTo(element, { x: -30, autoAlpha: 0 }, { x: 0, ...animationProps });
+                } else if (animationType === "fade-left") {
+                    gsap.fromTo(element, { x: 30, autoAlpha: 0 }, { x: 0, ...animationProps });
+                } else {
+                    gsap.fromTo(element, { autoAlpha: 0 }, { ...animationProps });
+                }
+            });
+
+            // Navbar shadow effect on scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('shadow-sm');
+                    navbar.classList.remove('border-transparent');
+                } else {
+                    navbar.classList.remove('shadow-sm');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
